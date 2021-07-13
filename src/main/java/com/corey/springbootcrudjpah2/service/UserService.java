@@ -8,6 +8,7 @@ import com.corey.springbootcrudjpah2.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class UserService {
     
@@ -45,5 +46,10 @@ public class UserService {
     public String deleteUserById(int id){
         userRepository.deleteById(id);
         return "User got deleted";
+    }
+
+    public String deleteAllUsers() {
+        userRepository.deleteAll();
+        return "Delete All Users";
     }
 }
