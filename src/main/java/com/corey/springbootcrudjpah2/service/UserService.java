@@ -1,5 +1,6 @@
 package com.corey.springbootcrudjpah2.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.corey.springbootcrudjpah2.dao.UserRepository;
@@ -29,6 +30,10 @@ public class UserService {
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
+    }
+
+    public List<User> getAllUsersByCreateDate(Date start, Date end) {
+        return userRepository.findByCreateDateBetween(start, end);
     }
 
     public User updateUser(User user){

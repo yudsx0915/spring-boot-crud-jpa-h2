@@ -1,5 +1,7 @@
 package com.corey.springbootcrudjpah2.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.corey.springbootcrudjpah2.entity.User;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/user", produces = "application/json")
 public class UserController {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
     @Autowired
     private UserService userService;
@@ -42,8 +45,17 @@ public class UserController {
     }
 
     @GetMapping("/getAllUsers")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllUsersByCreateDate")
+    public ResponseEntity<List<User>> getAllUsersByCreateDate(@RequestParam String start,@RequestParam String end) {
+        try{
+            return new ResponseEntity<>(userService.getAllUsersByCreateDate(sdf.parse(start), sdf.parse(end)), HttpStatus.OK);
+        }catch(Exception ex) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/updateUser")
