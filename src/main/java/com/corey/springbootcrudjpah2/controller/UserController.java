@@ -3,6 +3,7 @@ package com.corey.springbootcrudjpah2.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import com.corey.springbootcrudjpah2.entity.User;
 import com.corey.springbootcrudjpah2.service.UserService;
@@ -41,6 +42,7 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public User getUserById(@PathVariable int id) {
+        if(id == 0) throw new NoSuchElementException();
         return userService.getUserById(id);
     }
 

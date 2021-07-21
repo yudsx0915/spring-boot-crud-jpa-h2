@@ -1,5 +1,8 @@
 package com.corey.springbootcrudjpah2.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.corey.springbootcrudjpah2.service.UtilService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +21,13 @@ public class UtilController {
     @GetMapping("/getAddString")
     public String addString(@RequestParam String a, @RequestParam String b) {
         return utilService.addString(a, b);
+    }
+
+    @GetMapping("/testResponse")
+    public Map<String, Object> testResponse() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("error_code", "00");
+        map.put("message", "success");
+        return map;
     }
 }
